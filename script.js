@@ -60,6 +60,7 @@ window.addEventListener("load", () => {
          cargoStatus.innerHTML = "Cargo mass low enough for launch"
          launchStatus.style.color = "green"
          launchStatus.innerHTML = "Shuttle is ready for launch"
+         event.preventDefault()
       }
 
       fetch("https://handlers.education.launchcode.org/static/planets.json").then((response) => {
