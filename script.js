@@ -75,6 +75,7 @@ window.addEventListener("load", () => {
             launchStatus.style.color = "red"
             event.preventDefault()
          } else {
+            faultyItems.style.visibility = "visible"
             fuelStatus.innerHTML = "Fuel level high enough for launch"
             cargoStatus.innerHTML = "Cargo mass low enough for launch"
             launchStatus.style.color = "green"
