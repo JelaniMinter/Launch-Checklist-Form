@@ -9,6 +9,7 @@ window.addEventListener("load", () => {
       let fuelStatus = document.getElementById("fuelStatus")
       let cargoStatus = document.getElementById("cargoStatus")
       let launchStatus = document.getElementById("launchStatus")
+      let correctDataEntered = false
       
       function validNamecheck(testName) {
          let allowedLetters = "abcefghijklmnopqrstuvwxyz"
@@ -29,38 +30,42 @@ window.addEventListener("load", () => {
       }else if (isNaN(Number(fuelLevel)) || isNaN(Number(cargoMass))) {
          alert("Fuel level and Cargo mass must be numeric")
          event.preventDefault()
+      }else{
+         correctDataEntered = true
       }
 
-      document.getElementById("pilotStatus").innerHTML = `Pilot ${pilotName} is ready for launch`
-      document.getElementById("copilotStatus").innerHTML = `Co-Pilot ${copilotName} is ready for launch`
+      if (correctDataEntered === true) {
+         document.getElementById("pilotStatus").innerHTML = `Pilot ${pilotName} is ready for launch`
+         document.getElementById("copilotStatus").innerHTML = `Co-Pilot ${copilotName} is ready for launch`
       
-      if (fuelLevel < 10000 && cargoMass > 10000) {
-         faultyItems.style.visibility = "visible"
-         fuelStatus.innerHTML = "There is not enough fuel for the journey"
-         cargoStatus.innerHTML = "There is too much mass for launch"
-         launchStatus.innerHTML = "Shuttle not ready for launch"
-         launchStatus.style.color = "red"
-         event.preventDefault()
-      }else if (fuelLevel < 10000) {
-         faultyItems.style.visibility = "visible"
-         fuelStatus.innerHTML = "There is not enough fuel for the journey"
-         cargoStatus.innerHTML = "Cargo mass low enough for launch"
-         launchStatus.innerHTML = "Shuttle not ready for launch"
-         launchStatus.style.color = "red"
-         event.preventDefault()
-      } else if (cargoMass > 10000) {
-         faultyItems.style.visibility = "visible"
-         fuelStatus.innerHTML = "Fuel level high enough for launch"
-         cargoStatus.innerHTML = "There is too much mass for launch"
-         launchStatus.innerHTML = "Shuttle not ready for launch"
-         launchStatus.style.color = "red"
-         event.preventDefault()
-      } else {
-         fuelStatus.innerHTML = "Fuel level high enough for launch"
-         cargoStatus.innerHTML = "Cargo mass low enough for launch"
-         launchStatus.style.color = "green"
-         launchStatus.innerHTML = "Shuttle is ready for launch"
-         event.preventDefault()
+         if (fuelLevel < 10000 && cargoMass > 10000) {
+            faultyItems.style.visibility = "visible"
+            fuelStatus.innerHTML = "There is not enough fuel for the journey"
+            cargoStatus.innerHTML = "There is too much mass for launch"
+            launchStatus.innerHTML = "Shuttle not ready for launch"
+            launchStatus.style.color = "red"
+            event.preventDefault()
+         } else if (fuelLevel < 10000) {
+            faultyItems.style.visibility = "visible"
+            fuelStatus.innerHTML = "There is not enough fuel for the journey"
+            cargoStatus.innerHTML = "Cargo mass low enough for launch"
+            launchStatus.innerHTML = "Shuttle not ready for launch"
+            launchStatus.style.color = "red"
+            event.preventDefault()
+         } else if (cargoMass > 10000) {
+            faultyItems.style.visibility = "visible"
+            fuelStatus.innerHTML = "Fuel level high enough for launch"
+            cargoStatus.innerHTML = "There is too much mass for launch"
+            launchStatus.innerHTML = "Shuttle not ready for launch"
+            launchStatus.style.color = "red"
+            event.preventDefault()
+         } else {
+            fuelStatus.innerHTML = "Fuel level high enough for launch"
+            cargoStatus.innerHTML = "Cargo mass low enough for launch"
+            launchStatus.style.color = "green"
+            launchStatus.innerHTML = "Shuttle is ready for launch"
+            event.preventDefault()
+         }
       }
 
       fetch("https://handlers.education.launchcode.org/static/planets.json").then((response) => {
