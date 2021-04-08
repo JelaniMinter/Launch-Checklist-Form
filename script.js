@@ -1,4 +1,19 @@
 window.addEventListener("load", () => {
+   fetch("https://handlers.education.launchcode.org/static/planets.json").then((response) => {
+         response.json().then((json) => {
+            let planet = Math.round(Math.random()*5)
+            document.getElementById("missionTarget").innerHTML = 
+            `<h2>Mission Destination</h2>
+               <ol>
+                  <li>Name: ${json[planet].name}</li>
+                  <li>Diameter: ${json[planet].diameter}</li>
+                  <li>Star: ${json[planet].star}</li>
+                  <li>Distance from Earth: ${json[planet].distance}</li>
+                  <li>Number of Moons: ${json[planet].moons}</li>
+               </ol>
+            <img src="${json[planet].image}"></img>`
+         })})
+
    document.querySelector("form").addEventListener("submit", (event) => {
       
       let pilotName = document.querySelector("input[name=pilotName]").value
@@ -67,19 +82,4 @@ window.addEventListener("load", () => {
             event.preventDefault()
          }
       }
-
-      fetch("https://handlers.education.launchcode.org/static/planets.json").then((response) => {
-         response.json().then((json) => {
-            let planet = Math.round(Math.random()*5)
-            document.getElementById("missionTarget").innerHTML = 
-            `<h2>Mission Destination</h2>
-               <ol>
-                  <li>Name: ${json[planet].name}</li>
-                  <li>Diameter: ${json[planet].diameter}</li>
-                  <li>Star: ${json[planet].star}</li>
-                  <li>Distance from Earth: ${json[planet].distance}</li>
-                  <li>Number of Moons: ${json[planet].moons}</li>
-               </ol>
-            <img src="${json[planet].image}"></img>`
-         })})
 })})
